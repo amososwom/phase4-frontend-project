@@ -1,5 +1,5 @@
 import React from "react";
-// import "./PropertyDetail.css";
+
 
 function PropertyDetail() {
   return (
