@@ -1,11 +1,13 @@
-import React from 'react'
+import React from "react";
+// import "./PropertyDetail.css";
 
 function PropertyDetail() {
   return (
-    <div>
-      PropertyDetails
+    <div className="property-detail-container">
+      <h2>Property Details</h2>
+      <p>Details about the property will be displayed here.</p>
     </div>
-  )
+  );
 }
 
-export default PropertyDetail
+export default PropertyDetail;

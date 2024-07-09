@@ -1,9 +1,28 @@
+
+
+
+
+
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  overflow-x: hidden;
+}
+
 .footer {
   background-color: #333;
   color: #fff;
   padding: 20px 0;
   text-align: center;
-  flex-shrink: 0; /* Prevent the footer from shrinking */
+  flex-shrink: 0;
+  position: absolute;
+  width: 100%;
+  bottom: 0;
 }
 
 .footer-container {
@@ -39,8 +58,4 @@
 .social-media a {
   color: #fff;
   text-decoration: none;
-}
-
-.footer-bottom {
-  margin-top: 20px;
 }
