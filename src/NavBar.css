@@ -1,4 +1,4 @@
-
+/* 
 * {
   margin: 0;
   padding: 0;
@@ -40,6 +40,74 @@ body {
 
 .nav-link {
   color: #fff;
+  padding: 10px 20px;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.nav-link:hover {
+  background-color: #555;
+}
+
+.active {
+  border-bottom: 2px solid #fff;
+}
+
+@media screen and (max-width: 768px) {
+  .navbar-links {
+    display: none;
+  }
+
+  .navbar.active .navbar-links {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .nav-link {
+    padding: 10px;
+    text-align: center;
+  }
+} */
+
+
+
+
+
+
+
+
+
+.navbar {
+  background-color: #fcf6f6;
+  padding: 10px 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+
+} 
+
+.navbar-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  max-width: 1200px; /* Or you can remove this to let it span the entire width */
+}
+
+.navbar-logo {
+  color: #0f0f0f;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.navbar-links {
+  display: flex;
+}
+
+.nav-link {
+  color: #0a0909;
   padding: 10px 20px;
   text-decoration: none;
   transition: background-color 0.3s ease;
