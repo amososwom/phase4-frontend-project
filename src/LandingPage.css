@@ -1,0 +1,26 @@
+.landing-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: url('/path/to/your/background-image.jpg') no-repeat center center/cover;
+  color: #070707;
+  text-align: center;
+  padding: 20px;
+}
+
+.welcome-message {
+  background: rgba(250, 248, 248, 0.6);
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.welcome-message h1 {
+  font-size: 3rem;
+  margin-bottom: 20px;
+}
+
+.welcome-message p {
+  font-size: 1.5rem;
+}
