@@ -1,16 +1,3 @@
-
-
-
-
-
-
-
-
-
-
-
-
-
 import { NavLink } from "react-router-dom";
 
 function NavBar() {
@@ -27,6 +14,9 @@ function NavBar() {
           </NavLink>
           <NavLink to="/register" activeClassName="active" className="nav-link">
             Signup
+          </NavLink>
+          <NavLink to="/post-property" className="nav-link">
+            Post Property
           </NavLink>
           <NavLink to="/market" activeClassName="active" className="nav-link">
             Market
@@ -45,3 +35,15 @@ function NavBar() {
 }
 
 export default NavBar;
+
+
+
+
+
+
+
+
+
+
+
+
