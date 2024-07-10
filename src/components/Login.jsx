@@ -1,91 +1,30 @@
-// import React from 'react'
-
-// function Login() {
-//   return (
-//     <div>
-//       Login
-//     </div>
-//   )
-// }
-
-// export default Login
-
-
-
-
-
-
-
-
-
-
-// import React from "react";
-
-
-// function Login() {
-//   return (
-//     <div className="login-container">
-//       <h2>Login</h2>
-//       <form>
-//         <div className="form-group">
-//           <label>Email:</label>
-//           <input type="email" required />
-//         </div>
-//         <div className="form-group">
-//           <label>Password:</label>
-//           <input type="password" required />
-//         </div>
-//         <button type="submit">Login</button>
-//       </form>
-//     </div>
-//   );
-// }
-
-// export default Login;
-
-
-import React, { useState } from "react";
-import "./Login.css";
+import React from "react";
+// import "./Form.css";
 
 function Login() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Handle login logic here
-    console.log("Email:", email);
-    console.log("Password:", password);
-  };
-
   return (
     <div className="form-container">
-      <div className="title">Login</div>
-      <form className="form" onSubmit={handleSubmit}>
+      <h2 className="title">Login</h2>
+      <form className="form">
         <div className="input-group">
-          <label htmlFor="email">Email</label>
-          <input
-            type="email"
-            id="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
+          <label>
+            <input type="text" className="input" required />
+            <span>Username</span>
+          </label>
         </div>
         <div className="input-group">
-          <label htmlFor="password">Password</label>
-          <input
-            type="password"
-            id="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
+          <label>
+            <input type="password" className="input" required />
+            <span>Password</span>
+          </label>
         </div>
-        <button type="submit" className="submit-button">
+        <button type="submit" className="submit">
           Login
         </button>
       </form>
+      <div className="signin">
+        Don't have an account? <a href="/register">Sign up</a>
+      </div>
     </div>
   );
 }

@@ -1,7 +1,7 @@
 
 
 
-
+/* 
 
 
 * {
@@ -58,4 +58,113 @@ body {
 .social-media a {
   color: #fff;
   text-decoration: none;
+} */
+
+
+
+
+
+
+
+
+
+
+
+
+
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Modify the existing .footer class */
+.footer {
+  background-color: #333;
+  color: #fff;
+  padding: 2rem 0;
+  margin-top: auto; /* This pushes the footer to the bottom */
+}
+
+/* The rest of your Footer.css remains the same */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  overflow-x: hidden;
+}
+
+.footer {
+  background-color: #333;
+  color: #fff;
+  padding: 0rem 0;
+}
+
+.footer-container {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.footer-section {
+  flex: 1;
+  min-width: 250px;
+  margin-bottom: 1rem;
+}
+
+.footer-section h4 {
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+}
+
+.footer-section p {
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.social-media {
+  list-style-type: none;
+  padding: 0;
+}
+
+.social-media li {
+  margin-bottom: 0.5rem;
+}
+
+.social-media a {
+  color: #fff;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.social-media a:hover {
+  color: #f0f0f0;
+}
+
+.footer-bottom {
+  text-align: center;
+  padding-top: 2rem;
+  font-size: 0.8rem;
+}
+
+@media (max-width: 768px) {
+  .footer-container {
+    flex-direction: column;
+  }
+  
+  .footer-section {
+    margin-bottom: 2rem;
+  }
 }

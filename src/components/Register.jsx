@@ -1,68 +1,46 @@
-import React, { useState } from "react";
-
+import React from "react";
+// import "./Form.css";
 
 function Register() {
-  const [username, setUsername] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Handle register logic here
-    console.log("Username:", username);
-    console.log("Email:", email);
-    console.log("Password:", password);
-  };
-
   return (
     <div className="form-container">
-      <form className="form" onSubmit={handleSubmit}>
-        <div className="title">Register</div>
+      <h2 className="title">Signup</h2>
+      <form className="form">
         <div className="input-group">
           <label>
-            <input
-              type="text"
-              className="input"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-              required
-            />
+            <input type="text" className="input" required />
             <span>Username</span>
           </label>
         </div>
         <div className="input-group">
           <label>
-            <input
-              type="email"
-              className="input"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-            />
+            <input type="email" className="input" required />
             <span>Email</span>
           </label>
         </div>
         <div className="input-group">
           <label>
-            <input
-              type="password"
-              className="input"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
+            <input type="password" className="input" required />
             <span>Password</span>
           </label>
         </div>
         <button type="submit" className="submit">
-          Register
+          Signup
         </button>
       </form>
       <div className="signin">
-        Already have an account? <a href="/">Login here</a>
+        Already have an account? <a href="/login">Login</a>
       </div>
     </div>
   );
 }
 
 export default Register;
+
+
+
+
+
+
+
+
