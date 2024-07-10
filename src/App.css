@@ -33,53 +33,6 @@
   }
 }
 
-/* .card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
-}
-
-html, body {
-  height: 100%;
-}
-
-body {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-}
-
-.content {
-  flex: 1 0 auto;
-}
-
-.footer {
-  flex-shrink: 0;
-} */
-
-
-/* App.css */
-/* 
-body, html {
-  margin: 0;
-  padding: 0;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-}
-
-.app {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-}
-
-.content {
-  flex: 1;
-}
-
 footer {
   background-color: #302c2c;
   color: white;
