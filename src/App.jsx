@@ -11,41 +11,29 @@ import Favorites from "./components/Favorites";
 import NavBar from "./components/NavBar";
 import Footer from "./components/Footer";
 import "./App.css";
-import "./NavBar.css";
-import "./Footer.css";
-import "./LandingPage.css";
 
 function App() {
   return (
     <>
       <NavBar />
+      <div className="maincontent">
       <Routes>
-        <Route exact path="/" element={<LandingPage />} />
-        <Route exact path="/login" element={<Login />} />
-        <Route exact path="/register" element={<Register />} />
-        <Route exact path="/account" element={<Account/>} />
-        <Route exact path="/post-property" element={<PropertyPosting />} />
-        <Route exact path="/market" element={<Market />} />
-        <Route exact path="/property/:id" element={<PropertyDetail />} />
-        <Route exact path="/favorites" element={<Favorites />} />
+        <Route  path="/" element={<LandingPage />} />
+        <Route  path="/login" element={<Login />} />
+        <Route  path="/register" element={<Register />} />
+        <Route  path="/account" element={<Account/>} />
+        <Route  path="/post-property" element={<PropertyPosting />} />
+        <Route  path="/market" element={<Market />} />
+        <Route  path="/property/:id" element={<PropertyDetail />} />
+        <Route  path="/favorites" element={<Favorites />} />
       </Routes>
+      </div>
       <Footer />
     </>
   );
 }
 
 export default App;
-
-
-
-
-
-
-
-
-
-
-
 
 
 

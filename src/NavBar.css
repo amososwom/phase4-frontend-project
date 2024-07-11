@@ -1,18 +1,6 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  overflow-x: hidden;
-}
-
-
-
 
 .navbar {
-  background-color: #333;
+  background-color: rgba(45, 44, 44, 0.73);
   padding: 10px 20px;
   display: flex;
   justify-content: center;

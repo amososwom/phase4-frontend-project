@@ -35,7 +35,7 @@ function PropertyPosting() {
             <span>Image URL</span>
           </label>
         </div>
-        <button type="submit" className="submit">
+        <button type="submit" className="submit-button">
           Post Property
         </button>
       </form>
