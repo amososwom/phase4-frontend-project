@@ -1,4 +1,5 @@
 import { NavLink } from "react-router-dom";
+import "../NavBar.css";
 
 function NavBar() {
   return (
@@ -6,24 +7,24 @@ function NavBar() {
       <div className="navbar-container">
         <div className="navbar-logo">RealEstateApp</div>
         <div className="navbar-links">
-          <NavLink exact to="/" activeClassName="active" className="nav-link">
+          <NavLink exact to="/" className="nav-link">
             Home
           </NavLink>
-          <NavLink to="/login" activeClassName="active" className="nav-link">
+          <NavLink to="/login" className="nav-link">
             Login
           </NavLink>
-          <NavLink to="/register" activeClassName="active" className="nav-link">
+          <NavLink to="/register" className="nav-link">
             Signup
           </NavLink>
           <NavLink to="/post-property" className="nav-link">
             Post Property
           </NavLink>
-          <NavLink to="/market" activeClassName="active" className="nav-link">
+          <NavLink to="/market" className="nav-link">
             Market
           </NavLink>
           <NavLink
             to="/favorites"
-            activeClassName="active"
+           
             className="nav-link"
           >
             Favorites

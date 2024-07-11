@@ -24,7 +24,7 @@ function Register() {
             <span>Password</span>
           </label>
         </div>
-        <button type="submit" className="submit">
+        <button type="submit" className="submit-button">
           Signup
         </button>
       </form>
