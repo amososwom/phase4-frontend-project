@@ -1,103 +1,59 @@
-// import React from "react";
-
-
-// function Login() {
-//   return (
-//     <div className="form-container">
-//       <h2 className="title">Login</h2>
-//       <form className="form">
-//         <div className="input-group">
-//           <label>
-//             <input type="text" className="input" required />
-//             <span>Username</span>
-//           </label>
-//         </div>
-//         <div className="input-group">
-//           <label>
-//             <input type="password" className="input" required />
-//             <span>Password</span>
-//           </label>
-//         </div>
-//         <button type="submit" className="submit">
-//           Login
-//         </button>
-//       </form>
-//       <div className="signin">
-//         Don't have an account? <a href="/register">Sign up</a>
-//       </div>
-//     </div>
-//   );
-// }
-
-// export default Login;
-
-
-
-
-
-
-
-
-
-
-
-
-import React, { useState } from "react";
+import React from "react";
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import * as Yup from "yup";
+import useFetch from './UseFetch';
 import "./Login.css";
 
-function Login() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+const LoginSchema = Yup.object().shape({
+  username: Yup.string().required("Required"),
+  password: Yup.string().required("Password is required"),
+});
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Handle login logic here
-    console.log("Email:", email);
-    console.log("Password:", password);
+function Login() {
+  const { data, loading, error, fetchData } = useFetch();
+
+  const handleSubmit = async (values, { setSubmitting }) => {
+    const { result, error } = await fetchData("http://localhost:5000/login", 'POST', false, values);
+    if (error) {
+      console.error('Error:', error);
+    } else {
+      alert(`Logged in with ${result.access_token}`);
+      localStorage.setItem('access_token', result.access_token);
+    }
+    setSubmitting(false);
   };
 
   return (
     <div className="form-container">
       <div className="title">Login</div>
-      <form className="form" onSubmit={handleSubmit}>
-        <div className="input-group">
-          <label htmlFor="email">Email</label>
-          <input
-            type="email"
-            id="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-        </div>
-        <div className="input-group">
-          <label htmlFor="password">Password</label>
-          <input
-            type="password"
-            id="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-        </div>
-        <button type="submit" className="submit-button">
-          Login
-        </button>
-      </form>
+      <Formik
+        initialValues={{ username: "manu", password: "manu12345" }}
+        validationSchema={LoginSchema}
+        onSubmit={handleSubmit}
+      >
+        {({ isSubmitting }) => (
+          <Form className="form">
+            <div className="input-group">
+              <label htmlFor="username">Username</label>
+              <Field type="text" id="username" name="username" />
+              <ErrorMessage name="username" component="div" className="error" />
+            </div>
+            <div className="input-group">
+              <label htmlFor="password">Password</label>
+              <Field type="password" id="password" name="password" />
+              <ErrorMessage name="password" component="div" className="error" />
+            </div>
+            <button type="submit" className="submit-button" disabled={isSubmitting || loading}>
+              Login
+            </button>
+          </Form>
+        )}
+      </Formik>
       <div className="signin">
-         Don't have an account? <a href="/register">Sign up</a>
-        {" "}
+        Don't have an account? <a href="/register">Sign up</a>
       </div>
     </div>
   );
 }
 
 export default Login;
-
-
-
-
-
-
-
-
