@@ -1,43 +1,6 @@
-// import React from "react";
-// import { useParams } from "react-router-dom";
-
-// function PropertyDetail() {
-//   const { id } = useParams();
-
-//   return (
-//     <div>
-//       <h2>Property Detail - {id}</h2>
-//       {/* Implement the logic to display property details and reviews */}
-//       <div className="form-container">
-//         <h3 className="title">Leave a Review</h3>
-//         <form className="form">
-//           <div className="input-group">
-//             <label>
-//               <textarea className="input" required></textarea>
-//               <span>Review</span>
-//             </label>
-//           </div>
-//           <button type="submit" className="submit">
-//             Submit
-//           </button>
-//         </form>
-//       </div>
-//     </div>
-//   );
-// }
-
-// export default PropertyDetail;
-
-
-
-
-
-
-
-
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import useFetch from "./UseFetch"; // Update with correct path to useFetch hook
+import useFetch from "./UseFetch"; // Ensure the path is correct
 
 const PropertyDetail = () => {
   const { id } = useParams();
@@ -47,7 +10,12 @@ const PropertyDetail = () => {
 
   useEffect(() => {
     const fetchProperty = async () => {
-      await fetchData(`http://localhost:5000/properties/${id}`);
+      const { result } = await fetchData(
+        `http://localhost:5000/properties/${id}`
+      );
+      if (result) {
+        setProperty(result);
+      }
     };
     fetchProperty();
   }, [fetchData, id]);
@@ -57,8 +25,10 @@ const PropertyDetail = () => {
       const response = await fetch(
         `http://localhost:5000/properties/${id}/reviews`
       );
-      const data = await response.json();
-      setReviews(data);
+      if (response.ok) {
+        const data = await response.json();
+        setReviews(data);
+      }
     };
     fetchReviews();
   }, [id]);
@@ -97,49 +67,55 @@ const PropertyDetail = () => {
 
   return (
     <div>
-      <h2>{property.title}</h2>
-      <p>{property.description}</p>
-      <p>${property.price}</p>
-      <p>{property.location}</p>
-      <img
-        src={property.imageurl || "https://via.placeholder.com/150"}
-        alt={property.title}
-      />
-
-      <h3>Reviews</h3>
-      <ul>
-        {reviews.map((review) => (
-          <li key={review.id}>
-            <p>Rating: {review.rating}</p>
-            <p>Comment: {review.comment}</p>
-          </li>
-        ))}
-      </ul>
-
-      <h3>Leave a Review</h3>
-      <form onSubmit={handleReviewSubmit}>
-        <label>
-          Rating:
-          <input
-            type="number"
-            name="rating"
-            value={newReview.rating}
-            onChange={handleReviewChange}
-            min="1"
-            max="5"
-            required
+      {property ? (
+        <>
+          <h2>{property.title}</h2>
+          <p>{property.description}</p>
+          <p>${property.price}</p>
+          <p>{property.location}</p>
+          <img
+            src={property.imageurl || "https://via.placeholder.com/150"}
+            alt={property.title}
           />
-        </label>
-        <label>
-          Comment:
-          <textarea
-            name="comment"
-            value={newReview.comment}
-            onChange={handleReviewChange}
-          />
-        </label>
-        <button type="submit">Submit Review</button>
-      </form>
+
+          <h3>Reviews</h3>
+          <ul>
+            {reviews.map((review) => (
+              <li key={review.id}>
+                <p>Rating: {review.rating}</p>
+                <p>Comment: {review.comment}</p>
+              </li>
+            ))}
+          </ul>
+
+          <h3>Leave a Review</h3>
+          <form onSubmit={handleReviewSubmit}>
+            <label>
+              Rating:
+              <input
+                type="number"
+                name="rating"
+                value={newReview.rating}
+                onChange={handleReviewChange}
+                min="1"
+                max="5"
+                required
+              />
+            </label>
+            <label>
+              Comment:
+              <textarea
+                name="comment"
+                value={newReview.comment}
+                onChange={handleReviewChange}
+              />
+            </label>
+            <button type="submit">Submit Review</button>
+          </form>
+        </>
+      ) : (
+        <p>No property details available.</p>
+      )}
     </div>
   );
 };
