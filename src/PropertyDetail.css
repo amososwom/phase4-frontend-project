@@ -1,0 +1,62 @@
+.property-detail-container {
+  padding: 20px;
+  max-width: 800px;
+  margin: auto;
+}
+
+.property-detail-image {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.property-detail-info {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.property-detail-info p {
+  margin: 10px 0;
+}
+
+.property-detail-info p strong {
+  color: #333;
+}
+
+.form-container {
+  margin-top: 20px;
+}
+
+.form .input-group {
+  margin-bottom: 15px;
+}
+
+.form .input-group textarea.input {
+  width: 100%;
+  height: 100px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.form .input-group label span {
+  display: block;
+  margin-top: 5px;
+}
+
+.form .submit {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.form .submit:hover {
+  background-color: #45a049;
+}

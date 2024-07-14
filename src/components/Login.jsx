@@ -1,7 +1,7 @@
 import React from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import useFetch from './UseFetch';
+import useFetch from "./UseFetch";
 import "./Login.css";
 
 const LoginSchema = Yup.object().shape({
@@ -13,12 +13,17 @@ function Login() {
   const { data, loading, error, fetchData } = useFetch();
 
   const handleSubmit = async (values, { setSubmitting }) => {
-    const { result, error } = await fetchData("http://localhost:5000/login", 'POST', false, values);
+    const { result, error } = await fetchData(
+      "http://localhost:5000/login",
+      "POST",
+      false,
+      values
+    );
     if (error) {
-      console.error('Error:', error);
+      console.error("Error:", error);
     } else {
       alert(`Logged in with ${result.access_token}`);
-      localStorage.setItem('access_token', result.access_token);
+      localStorage.setItem("access_token", result.access_token);
     }
     setSubmitting(false);
   };
@@ -43,7 +48,11 @@ function Login() {
               <Field type="password" id="password" name="password" />
               <ErrorMessage name="password" component="div" className="error" />
             </div>
-            <button type="submit" className="submit-button" disabled={isSubmitting || loading}>
+            <button
+              type="submit"
+              className="submit-button"
+              disabled={isSubmitting || loading}
+            >
               Login
             </button>
           </Form>
@@ -57,3 +66,4 @@ function Login() {
 }
 
 export default Login;
+
