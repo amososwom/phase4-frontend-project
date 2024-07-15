@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import useFetch from "./UseFetch"; // Ensure the path is correct
+import "../PropertyDetail.css"; // Import the CSS file
 
 const PropertyDetail = () => {
   const { id } = useParams();
-  const { data: property, loading, error, fetchData } = useFetch();
-  const [reviews, setReviews] = useState([]);
+  const { data: propertyData, loading, error, fetchData } = useFetch();
+  const [property, setProperty] = useState(null);
   const [newReview, setNewReview] = useState({ rating: "", comment: "" });
 
   useEffect(() => {
@@ -19,19 +20,6 @@ const PropertyDetail = () => {
     };
     fetchProperty();
   }, [fetchData, id]);
-
-  useEffect(() => {
-    const fetchReviews = async () => {
-      const response = await fetch(
-        `http://localhost:5000/properties/${id}/reviews`
-      );
-      if (response.ok) {
-        const data = await response.json();
-        setReviews(data);
-      }
-    };
-    fetchReviews();
-  }, [id]);
 
   const handleReviewChange = (e) => {
     setNewReview({ ...newReview, [e.target.name]: e.target.value });
@@ -52,7 +40,10 @@ const PropertyDetail = () => {
     );
     if (response.ok) {
       const review = await response.json();
-      setReviews([...reviews, review]);
+      setProperty({
+        ...property,
+        reviews: [...property.reviews, review],
+      });
       setNewReview({ rating: "", comment: "" });
     }
   };
@@ -78,40 +69,58 @@ const PropertyDetail = () => {
             alt={property.title}
           />
 
-          <h3>Reviews</h3>
-          <ul>
-            {reviews.map((review) => (
-              <li key={review.id}>
-                <p>Rating: {review.rating}</p>
-                <p>Comment: {review.comment}</p>
-              </li>
+          {/* <h3>Reviews</h3> */}
+          <div className="reviews">
+            {property.reviews.map((review) => (
+              <div key={review.id} className="card">
+                <div className="stars">
+                  {[...Array(review.rating)].map((star, index) => (
+                    <span key={index} className="star">
+                      ★
+                    </span>
+                  ))}
+                </div>
+                <div className="infos">
+                  <p className="description">{review.comment}</p>
+                  <p className="author">by {review.user_name}</p>
+                  <p className="date-time">
+                    {new Date(review.created_at).toLocaleDateString()}
+                  </p>
+                </div>
+              </div>
             ))}
-          </ul>
+          </div>
 
           <h3>Leave a Review</h3>
-          <form onSubmit={handleReviewSubmit}>
-            <label>
-              Rating:
-              <input
-                type="number"
-                name="rating"
-                value={newReview.rating}
-                onChange={handleReviewChange}
-                min="1"
-                max="5"
-                required
-              />
-            </label>
-            <label>
-              Comment:
-              <textarea
-                name="comment"
-                value={newReview.comment}
-                onChange={handleReviewChange}
-              />
-            </label>
-            <button type="submit">Submit Review</button>
-          </form>
+          <div className="form-container">
+            <h3 className="title">Leave a Review</h3>
+            <form onSubmit={handleReviewSubmit} className="form">
+              <div className="input-group">
+                <label>Rate:</label>
+                <input
+                  type="number"
+                  name="rating"
+                  value={newReview.rating}
+                  onChange={handleReviewChange}
+                  min="1"
+                  max="5"
+                  required
+                />
+              </div>
+              <div className="input-group">
+                <label>Comment:</label>
+                <textarea
+                  name="comment"
+                  value={newReview.comment}
+                  onChange={handleReviewChange}
+                  required
+                />
+              </div>
+              <button type="submit" className="sign">
+                Submit Review
+              </button>
+            </form>
+          </div>
         </>
       ) : (
         <p>No property details available.</p>
@@ -121,3 +130,16 @@ const PropertyDetail = () => {
 };
 
 export default PropertyDetail;
+
+
+
+
+
+
+
+
+
+
+
+
+
