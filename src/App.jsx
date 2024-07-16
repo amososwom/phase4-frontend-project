@@ -12,6 +12,7 @@ import NavBar from "./components/NavBar";
 import Footer from "./components/Footer";
 import "./App.css";
 
+
 function App() {
   return (
     <>
@@ -24,7 +25,7 @@ function App() {
         <Route  path="/account" element={<Account/>} />
         <Route  path="/post-property" element={<PropertyPosting />} />
         <Route  path="/market" element={<Market />} />
-        <Route  path="/property/:id" element={<PropertyDetail />} />
+        <Route  path="/property-detail/:id" element={<PropertyDetail />} />
         <Route  path="/favorites" element={<Favorites />} />
       </Routes>
       </div>
