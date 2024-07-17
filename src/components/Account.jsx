@@ -58,7 +58,7 @@ function Account() {
   
   return (
     <div className="account">
-      <span className="welcome">Welcome Back <i>{userDetails['username']}</i></span>
+      <span className="welcome">Welcome, <i>{userDetails['username']}</i></span>
       <div className="accountd">
        <div className="accountdimg">
        <img src={Usericon} alt="" /> 

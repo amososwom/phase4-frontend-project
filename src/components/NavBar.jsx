@@ -14,7 +14,7 @@ function NavBar({ loggedIn, setLoggedIn }) {
   return (
     <nav className="navbar">
       <div className="navbar-container">
-        <div className="navbar-logo">RealEstate-App</div>
+        <div className="navbar-logo">Haven-Hunter🌆</div>
         <div className="navbar-links">
         <NavLink to="/" className="nav-link">
                 Home
