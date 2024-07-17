@@ -1,7 +1,7 @@
 .pd{
     background: rgba(3, 11, 14, 0.45);
     width: 65%;
-    height: 96%;
+    height: auto;
     border-radius: 0.7rem;
     display: grid;
     grid-template-columns: 1fr 35%;
