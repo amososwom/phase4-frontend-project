@@ -1,105 +1,153 @@
-/* .user-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin: 20px 0;
+.account{
+    width: 73%;
+    height: 60%;
+    background: #fff;
+    display: grid;
+    grid-template-columns: 400px 1fr;
+    grid-template-rows: auto 1fr;
+    border-radius: 12px;
+    position: relative;
 }
 
-.user-table th,
-.user-table td {
-  border: 1px solid #ddd;
-  padding: 8px;
-}
-
-.user-table th {
-  padding-top: 12px;
-  padding-bottom: 12px;
-  text-align: left;
-  background-color: #f2f2f2;
-  color: black;
-}
-
-.user-table td div {
-  margin-bottom: 10px;
-} */
-
-
-
-
-
-
-
-cssCopy/* account.css */
-
-.user-table {
+.account .welcome{
+    position: relative;
     width: 100%;
-    border-collapse: separate;
-    border-spacing: 0;
-    margin: 20px 0;
-    font-family: Arial, sans-serif;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    padding: 1rem;
+    grid-area: 1/1/2/3;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    padding-left: 1rem;
+    font-weight: 800;
+    font-size: 1.5rem;
+    gap: 0.5rem;
+    box-shadow: 0 1px 5px #c1bcbc;
 }
 
-.user-table thead th {
-    background-color: #f8f9fa;
-    color: #333;
-    font-weight: bold;
-    padding: 12px;
-    text-align: left;
-    border-bottom: 2px solid #dee2e6;
-    text-transform: uppercase;
-    font-size: 14px;
+.accountd {
+    grid-area: 2/1/3/2;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr;
+    place-content: star;
+    padding: 1rem 0.6rem;
+}
+.accountdimg {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    gap: 1rem;
 }
 
-.user-table tbody td {
-    padding: 12px;
-    border-bottom: 1px solid #dee2e6;
-    color: #333;
-    font-size: 14px;
+.accountdimg img{
+    width: 100px;
+    border-radius: 50%;
+}
+.accountdimg span{
+    font-weight: 800;
+    font-size: 1.5rem;
+    font-style: italic;
 }
 
-.user-table tbody tr:last-child td {
-    border-bottom: none;
+.accountdmore {
+    display: grid;
+    place-content: start center;
+    padding: 1rem;
 }
 
-.user-table tbody tr:nth-child(even) {
-    background-color: #f8f9fa;
+.accountdmore ul li{
+
+font-size: 1.2rem;
+}
+.accountdmore ul li i{
+    color: orange;
+    font-style: italic;
+    font-size: .9rem;
 }
 
-.user-table tbody tr:hover {
-    background-color: #e9ecef;
-    transition: background-color 0.3s ease;
+.accountp{
+    grid-area: 2/2/3/3;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr;
+    overflow: hidden;   
+    padding-right: 0.5rem;
 }
 
-/* Responsive design */
-@media screen and (max-width: 600px) {
-    .user-table thead {
-        display: none;
-    }
+.accountp span{
+    grid-area: 1/1/2/2;
+    padding: 1rem 0rem;
+    text-align: center;
+    font-weight: 600;
+    text-decoration: underline;
+    font-size: 1.2rem;
+    font-style: italic;
+}
+
+.accountp .table{
+    grid-area: 2/1/3/2;
+    border-radius: 12px;
+    border: 1px solid #c1bcbc;
+    overflow: auto;
+}
+.table table{
+
+padding: 0.5rem;
+border-collapse: collapse;
+width: 100%;
+}
+ table thead tr{
+     padding: 1rem;
+     background: #9a9797;
+}
+table thead 
+{
+    position: sticky;
+    z-index: 40;
+}
+
+table thead tr th{
+padding: 0.8rem;
+color: #fff;
+}
+
+
+ table tbody {
+    /* background: #fff; */
+}
+
+ table tbody tr{
+    border-bottom: 1px solid #c1bcbc;
+    padding: 80.5px 0.4px;
+}
+
+ table tbody tr td{
+    padding: 0.5rem;
+    font-size: 0.9rem;
+}
+
+ tbody tr td img{
+    width: 150px !important;
+    height: 80px !important;
+    border-radius: 15px;
+
+}
+
+tbody tr td button{
+    padding: 0.4rem 1rem;
+    border-radius: 7px;
+    border: none;
+    outline: none;
+    background: #47ff22;
+    color: #2d2d2d;
+}
+
+table tbody tr td:nth-child(3){
+    text-wrap: nowrap;
+    font-weight: 600;
     
-    .user-table, .user-table tbody, .user-table tr, .user-table td {
-        display: block;
-        width: 100%;
-    }
-    
-    .user-table tr {
-        margin-bottom: 15px;
-    }
-    
-    .user-table td {
-        text-align: right;
-        padding-left: 50%;
-        position: relative;
-    }
-    
-    .user-table td::before {
-        content: attr(data-label);
-        position: absolute;
-        left: 6px;
-        width: 45%;
-        padding-right: 10px;
-        white-space: nowrap;
-        text-align: left;
-        font-weight: bold;
-    }
 }
 
+table tbody tr:nth-of-type(even){
+    background: #dfdfdf;
+}

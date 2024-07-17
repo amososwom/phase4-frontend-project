@@ -16,9 +16,9 @@
 }
 
 .navbar-logo {
-  color: #fff;
-  font-size: 1.5rem;
-  font-weight: bold;
+  color: #ec8e00;
+  font-size: 1.9rem;
+  font-weight: 800;
 }
 
 .navbar-links {
@@ -56,6 +56,5 @@
     text-align: center;
   }
 } 
-
 
 

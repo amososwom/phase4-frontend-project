@@ -7,13 +7,13 @@ const Footer = () => {
     <footer className="footer">
       <div className="footer-container">
         <div className="footer-section">
-          <h4>Contact Us</h4>
+          <span className="ftt">Contact Us</span>
           <p>Email: support@realestateapp.com</p>
           <p>Phone: (123) 456-7890</p>
           <p>Address: 123 Real Estate St., Property City, Country</p>
         </div>
         <div className="footer-section">
-          <h4>About Us</h4>
+          <span className="ftt">About Us</span>
           <p>
             Our mission is to simplify the process of buying, selling, and
             renting properties.
@@ -24,7 +24,7 @@ const Footer = () => {
           </p>
         </div>
         <div className="footer-section">
-          <h4>Follow Us</h4>
+          <span className="ftt">Follow Us</span>
           <ul className="social-media">
             <li>
               <a

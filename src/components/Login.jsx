@@ -1,7 +1,8 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import useFetch from "./UseFetch";
+import useFetch from './UseFetch';
 import "./Login.css";
 
 const LoginSchema = Yup.object().shape({
@@ -9,30 +10,32 @@ const LoginSchema = Yup.object().shape({
   password: Yup.string().required("Password is required"),
 });
 
-function Login() {
+function Login({ setLoggedIn, setUserDetails }) {
   const { data, loading, error, fetchData } = useFetch();
+  let directaccount = useNavigate()
 
   const handleSubmit = async (values, { setSubmitting }) => {
-    const { result, error } = await fetchData(
-      "http://localhost:5000/login",
-      "POST",
-      false,
-      values
-    );
-    if (error) {
-      console.error("Error:", error);
-    } else {
-      alert(`Logged in with ${result.access_token}`);
-      localStorage.setItem("access_token", result.access_token);
-    }
-    setSubmitting(false);
-  };
 
+    const { result, error } = await fetchData("http://localhost:5000/login", 'POST', false, values);
+ 
+    if(error){
+      alert('Opps, Invalid Credentials')
+      setSubmitting(false);
+      return;
+    }
+    (result.current_user)
+    setUserDetails(result.current_user)
+    console.log(`Logged in with ${result.access_token}`);
+    localStorage.setItem('access_token', result.access_token);
+    setLoggedIn(true)
+    directaccount('/account')
+  };
+  
   return (
     <div className="form-container">
       <div className="title">Login</div>
       <Formik
-        initialValues={{ username: "manu", password: "manu12345" }}
+        initialValues={{ username: "", password: "" }}
         validationSchema={LoginSchema}
         onSubmit={handleSubmit}
       >
@@ -48,11 +51,7 @@ function Login() {
               <Field type="password" id="password" name="password" />
               <ErrorMessage name="password" component="div" className="error" />
             </div>
-            <button
-              type="submit"
-              className="submit-button"
-              disabled={isSubmitting || loading}
-            >
+            <button type="submit" className="submit-button" disabled={isSubmitting || loading}>
               Login
             </button>
           </Form>
@@ -66,4 +65,3 @@ function Login() {
 }
 
 export default Login;
-

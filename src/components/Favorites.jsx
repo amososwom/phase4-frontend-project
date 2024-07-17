@@ -1,63 +1,82 @@
-// import React from "react";
-
-// function Favorites() {
-//   return (
-//     <div>
-//       <h2>Favorites</h2>
-//       {/* Implementing  the logic to display favorite properties here */}
-//     </div>
-//   );
-// }
-
-// export default Favorites;
-
-
-
-
-
-
-
-
 import React, { useEffect, useState } from "react";
+import { useNavigate } from 'react-router-dom'
+import useFetch from "./UseFetch";
+import "./favourites.css";
+
+
 
 function Favorites() {
-  const [favoriteProperties, setFavoriteProperties] = useState([]);
+  const [properties, setProperties] = useState([]);
+  const {fetchData } = useFetch();
+  let navigate = useNavigate()
+  
 
+
+  
   useEffect(() => {
-    const fetchFavorites = async () => {
-      try {
-        const response = await fetch("http://localhost:5000/favorites", {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("access_token")}`,
-          },
-        });
-        if (response.ok) {
-          const favorites = await response.json();
-          setFavoriteProperties(favorites);
+    const fetchUserProperties = async () => {
+      const token = localStorage.getItem("access_token");
+      if (token) {
+        const { result, error } = await fetchData("http://localhost:5000/user/favorites", "GET", true, null);
+        if (result) {
+          setProperties(result);
         } else {
-          console.error("Failed to fetch favorites");
+          alert("Error fetching all Favorites:", error);
         }
-      } catch (error) {
-        console.error("Error fetching favorites:", error);
       }
     };
-    fetchFavorites();
+    fetchUserProperties();
   }, []);
 
+  const moreDetails = (id) => {
+    navigate(`/property/${id}`)
+  };
+
   return (
-    <div>
-      <h2>Favorites</h2>
-      <div className="favorite-properties">
-        {favoriteProperties.map((property) => (
-          <div key={property.id} className="favorite-property">
-            <h3>{property.title}</h3>
-            <p>{property.description}</p>
-            <p>${property.price}</p>
-            <p>{property.location}</p>
-          </div>
-        ))}
+    <div className="accountp" >
+    <span>Current-Propertys</span>
+
+  <div className="table">
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Image</th>
+          <th>Title</th>
+          <th>Description</th>
+          <th>Location</th>
+          <th>Price</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        {properties && properties.length > 0 ? (
+          properties.map((property) => (
+            <tr key={property.property_id}>
+              <td>{property.property_id}</td>
+              <td>
+                <img src={property.imageurl} alt={property.title} style={{ width: '100px', height: '100px' }} />
+              </td>
+              <td>{property.title}</td>
+              <td>{property.description}</td>
+              <td>{property.location}</td>
+              <td>${property.price}</td>
+              <td>
+              <button type="button" onClick={() => moreDetails(property.property_id)}>
+                        more
+                      </button>
+              </td>
+            </tr>
+          ))
+        ) : (
+          <tr>
+            <td colSpan="7">You have no favorites.</td>
+          </tr>
+        )}
+      </tbody>
+    </table>
       </div>
-    </div>
+  </div>
   );
 }
 

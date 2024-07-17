@@ -10,3 +10,21 @@ body {
   width: 100%;
   height: 100vh;
 }
+.smlldd{
+  display: none;
+}
+@media only screen and (max-width: 650px) {
+.smlldd{
+  display: flex;
+  color: orangered;
+  font-size: 1.3rem;
+}
+#root{
+  display: none;
+}
+body{
+  display: grid;
+  place-content: center;
+}
+  
+}

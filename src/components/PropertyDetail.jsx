@@ -1,145 +1,184 @@
-import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
-import useFetch from "./UseFetch"; // Ensure the path is correct
-import "../PropertyDetail.css"; // Import the CSS file
+import React, { useState, useEffect, useContext } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import "../propertydetails.css";
+import useFetch from './UseFetch';
+import { UserContext } from '../App';
 
-const PropertyDetail = () => {
+import Myreview from './Myreview';
+
+
+
+function PropertyDetail() {
+  
+  const userDetails = useContext(UserContext)
+  const navigate = useNavigate()
+
   const { id } = useParams();
-  const { data: propertyData, loading, error, fetchData } = useFetch();
-  const [property, setProperty] = useState(null);
-  const [newReview, setNewReview] = useState({ rating: "", comment: "" });
+  const [formData, setFormData] = useState({
+    "comment": "",
+    "property_id": id,
+  })
+
+  const [listed, setListed]  = React.useState(false)
+  let goorange = listed ? {'background': 'rgba(226, 134, 48, 0.9)', 'border': 'none'} : []
+
+
+  const {fetchData } = useFetch();
+
+  const [propertyDetails, setPropertyDetails] = useState({})
+  const [allReviews, setAllReviews] = useState([])
+  
+   let owner = userDetails['id'] == propertyDetails.user_id
+   let gored = owner ? {'background': '#ac0303', 'border': 'none'} : []
+  
+
+
+   const fetchInitialData = async () => {
+     const { result, error } = await fetchData(`http://localhost:5000/properties/${id}`, 'GET');
+     if (error) {
+       console.log("Error Grabing Properties Details");
+       
+     } else {
+       setPropertyDetails(result)
+       setAllReviews(result.reviews)
+     }
+   };
 
   useEffect(() => {
-    const fetchProperty = async () => {
-      const { result } = await fetchData(
-        `http://localhost:5000/properties/${id}`
-      );
-      if (result) {
-        setProperty(result);
+    fetchInitialData()
+  }, [])
+
+  useEffect(() => {
+    if (propertyDetails['favorites']) {
+        const userFavoriteExists = propertyDetails['favorites'].some(favorite => favorite.user_id === userDetails['id']);
+        setListed(userFavoriteExists);
+  console.log('1');
+
+    }
+  }, [propertyDetails]);
+
+  function handleSubmit(e){
+    e.preventDefault();
+    
+    const postReviews = async () => {
+      const { result, error } = await fetchData("http://localhost:5000/reviews", 'POST', true, formData);
+      if (error) {
+        console.log("Error Posting Properties");
+        
+      } else {
+        setAllReviews(prev => [...prev, result])
+        formData.comment = ""
       }
     };
-    fetchProperty();
-  }, [fetchData, id]);
-
-  const handleReviewChange = (e) => {
-    setNewReview({ ...newReview, [e.target.name]: e.target.value });
-  };
-
-  const handleReviewSubmit = async (e) => {
-    e.preventDefault();
-    const response = await fetch(
-      `http://localhost:5000/properties/${id}/reviews`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("access_token")}`,
-        },
-        body: JSON.stringify(newReview),
-      }
-    );
-    if (response.ok) {
-      const review = await response.json();
-      setProperty({
-        ...property,
-        reviews: [...property.reviews, review],
-      });
-      setNewReview({ rating: "", comment: "" });
+    
+    postReviews();
+  }
+  
+    function handleChanges(e) {
+      let name = e.target.name;
+      let value = e.target.value;
+      
+      setFormData(prev => ({
+        ...prev,
+        [name]: value
+      }));
     }
-  };
 
-  if (loading) {
-    return <p>Loading property...</p>;
-  }
+    const buyPropertie = async () => {
+      let values = {
+        "user_id": userDetails['id'],
+        "status": 0
+      }
+      const { result, error } = await fetchData(`http://localhost:5000/properties/${id}`, 'PATCH', true, values);
+      if (error) {
+        alert("Opps an error occured will try to fix that");
+        return
+      }
+          navigate(`/account`)
+    };
+      
 
-  if (error) {
-    return <p>Error fetching property: {error.message}</p>;
-  }
+    const handleFav = async () => {
+      let values = {
+        "property_id": id,
+      }
+      const { result, error } = await fetchData(`http://localhost:5000/favorites`, 'POST', true, values);
+      if (error) {
+        console.log("Opps an error occured will try to fix that");
+        return
+      }
+      fetchInitialData()
+      alert(`Successfully Added  to Your Favorites`)
+    };
+     
+    const deleteFav = async () => {
+      const { result, error } = await fetchData(`http://localhost:5000/user/favorites/${id}`, 'DELETE', true, null);
+      if (error) {
+        console.log("Opps an error occured will try to fix that");
+        return
+      }
+      fetchInitialData()
+      alert(`Successfully Deleted from Your Favorites`)
+    };
+    
+    let myReviews = allReviews.map(areview => {
+      return <Myreview key={areview.id} {...areview}/>
+    })
 
   return (
-    <div>
-      {property ? (
-        <>
-          <h2>{property.title}</h2>
-          <p>{property.description}</p>
-          <p>${property.price}</p>
-          <p>{property.location}</p>
-          <img
-            src={property.imageurl || "https://via.placeholder.com/150"}
-            alt={property.title}
-          />
+    <div className="pd">
+      <span className="pt">{propertyDetails.title}</span>
+      <div className="pc">
+        <div className="pdin">
+         <div className="imgbox">
+         <img src={propertyDetails.imageurl} alt={propertyDetails.title} />
+         </div>
+         <div className="pddes">
+          <span className="pddestitle">{propertyDetails.title} <i>by: {propertyDetails.username}</i></span>
+           <div className="pddessin">
 
-          {/* <h3>Reviews</h3> */}
-          <div className="reviews">
-            {property.reviews.map((review) => (
-              <div key={review.id} className="card">
-                <div className="stars">
-                  {[...Array(review.rating)].map((star, index) => (
-                    <span key={index} className="star">
-                      ★
-                    </span>
-                  ))}
-                </div>
-                <div className="infos">
-                  <p className="description">{review.comment}</p>
-                  <p className="author">by {review.user_name}</p>
-                  <p className="date-time">
-                    {new Date(review.created_at).toLocaleDateString()}
-                  </p>
-                </div>
-              </div>
-            ))}
-          </div>
+            <div className="pdesdes">
+              <span className="pddesst">Description:</span>
+              <span className="pddescsin">
+                <ul>
+                  <li>
+                  {propertyDetails.description}
+                  </li>
+                </ul>
+              </span>
+            </div>
 
-          <h3>Leave a Review</h3>
-          <div className="form-container">
-            <h3 className="title">Leave a Review</h3>
-            <form onSubmit={handleReviewSubmit} className="form">
-              <div className="input-group">
-                <label>Rate:</label>
-                <input
-                  type="number"
-                  name="rating"
-                  value={newReview.rating}
-                  onChange={handleReviewChange}
-                  min="1"
-                  max="5"
-                  required
-                />
-              </div>
-              <div className="input-group">
-                <label>Comment:</label>
-                <textarea
-                  name="comment"
-                  value={newReview.comment}
-                  onChange={handleReviewChange}
-                  required
-                />
-              </div>
-              <button type="submit" className="sign">
-                Submit Review
-              </button>
-            </form>
+            <ul>
+            <li className=""> Location:  <i>{propertyDetails.location}</i></li>
+            <li className="">Price: <i>$ {propertyDetails.price}</i></li>
+            <li className="">Released: <i>{propertyDetails.created_at}</i></li>
+            </ul>
+           </div>
+         </div>
+
+        </div>
+        <div className="pdactions">
+          <button className="actionsbtn" style={gored}onClick={buyPropertie}>{owner ? 'Retrieve' : 'Buy'}</button>
+
+          <button className="actionsbtn" style={goorange} onClick={ listed ? deleteFav : handleFav }>{listed ? 'Remove' : 'Add'} Favorites</button>
+        </div>
+      </div>
+      <div className="pr">
+        <div className="prall">
+          <span className="prtitile">Recent-Reviews</span>
+          <div className="prreviews">
+            {myReviews}
           </div>
-        </>
-      ) : (
-        <p>No property details available.</p>
-      )}
+        </div>
+        <form className="prform" onSubmit={handleSubmit}>
+
+          <span>Leave a Review</span>
+          <textarea placeholder="Your Review" name= "comment" value={formData.comment} onChange={(e) => handleChanges(e)}/>
+          <button className="actionsbtn" type="submit">Submit Review</button>
+        </form>
+      </div>
     </div>
   );
-};
+}
 
 export default PropertyDetail;
-
-
-
-
-
-
-
-
-
-
-
-
-

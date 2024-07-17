@@ -30,6 +30,7 @@ function PropertyPosting() {
         alert("Error posting property");
       } else {
         alert(result.title)
+        resetForm()
       }
     },
   });
@@ -115,7 +116,3 @@ function PropertyPosting() {
 }
 
 export default PropertyPosting;
-
-
-
-
