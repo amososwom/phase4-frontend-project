@@ -33,7 +33,7 @@ function Favorites() {
   };
 
   return (
-    <div className="accountp" >
+    <div className="accountps accountp" >
     <span>Current-Propertys</span>
 
   <div className="table">

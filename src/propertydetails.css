@@ -1,7 +1,7 @@
 .pd{
     background: rgba(3, 11, 14, 0.45);
     width: 65%;
-    height: 75%;
+    height: auto;
     border-radius: 0.7rem;
     display: grid;
     grid-template-columns: 1fr 35%;
@@ -35,7 +35,7 @@
     grid-template-rows: auto 1fr;
 }
 .imgbox {
-    height: 19rem;
+    height: 14rem;
     overflow: hidden;
     border-radius: 10px;
 }

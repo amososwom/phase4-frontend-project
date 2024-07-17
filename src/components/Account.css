@@ -1,12 +1,13 @@
 .account{
     width: 73%;
-    height: 60%;
+    min-height: 600px;
     background: #fff;
     display: grid;
     grid-template-columns: 400px 1fr;
     grid-template-rows: auto 1fr;
     border-radius: 12px;
     position: relative;
+    padding-bottom: 1rem;
 }
 
 .account .welcome{

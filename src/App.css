@@ -8,10 +8,13 @@
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
+  overflow: auto;
+  grid-gap: 1rem;
+
 }
 
 .maincontent{
-  overflow: auto;
+  overflow: visible;
   display: grid;
   place-items: center;
 }
