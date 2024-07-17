@@ -2,11 +2,13 @@
 
 #### Date,17/July/2024
 
-### Contributors **Amos Oswo**, **Clarence Kinuthia** and **Emmanuel Njoroge**
+### Contributors: **Amos Oswo**, **Clarence Kinuthia** and **Emmanuel Njoroge**
 
 ### Description:
-This is a simple app with which users can be able to explore real estate property and can sell,buy leave a favorite for a property for easier access in the future when they get back to the app
+#### Need a house and don't know where to start?
+This is a simple app with which users can be able to explore real estate property and can sell,buy leave a favorite for a property for easier access in the future when they get back to the app.
 
+Made with interactive UI/UX buying,selling and navigating property sales has been made easier with HAVEN-HUNT!
 ### Installaton:
 This is a web app which can be accessed from the browser.
 Use the live link provided below to access it.
