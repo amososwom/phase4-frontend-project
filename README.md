@@ -13,7 +13,8 @@ Made with interactive UI/UX buying,selling and navigating property sales has bee
 This is a web app which can be accessed from the browser.
 Use the live link provided below to access it.
 ### Live Link:
-[Click here to access the app](https)
+[Click here to access the app](https:haven.boogiecoin.com)
+
 
 ### Requirements:
 * An electronic gadget with browsing capability
@@ -24,6 +25,7 @@ Use the live link provided below to access it.
 * CSS
 * Git
 * FLASK
+* PYTHON
 
 
 ### Support and contact details
