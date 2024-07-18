@@ -17,7 +17,7 @@ function Favorites() {
     const fetchUserProperties = async () => {
       const token = localStorage.getItem("access_token");
       if (token) {
-        const { result, error } = await fetchData("http://localhost:5000/user/favorites", "GET", true, null);
+        const { result, error } = await fetchData("https://api.huven.boogiecoin.com/user/favorites", "GET", true, null);
         if (result) {
           setProperties(result);
         } else {

@@ -27,7 +27,7 @@ function App() {
 
   useEffect(() => {
     const fetchInitialData = async () => {
-      const { result, error } = await fetchData("http://localhost:5000/auth", 'GET');
+      const { result, error } = await fetchData("https://api.huven.boogiecoin.com/auth", 'GET');
       if (error) {
         console.log("Error Confirming access_token");
       } else {

@@ -25,7 +25,7 @@ function PropertyPosting() {
     }),
     onSubmit: async (values, { setSubmitting, resetForm }) => {
 
-    const { result, error } = await fetchData("http://localhost:5000/properties", 'POST', true, values);
+    const { result, error } = await fetchData("https://api.huven.boogiecoin.com/properties", 'POST', true, values);
         if (error) {
         alert("Error posting property");
       } else {

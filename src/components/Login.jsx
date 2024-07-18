@@ -16,7 +16,7 @@ function Login({ setLoggedIn, setUserDetails }) {
 
   const handleSubmit = async (values, { setSubmitting }) => {
 
-    const { result, error } = await fetchData("http://localhost:5000/login", 'POST', false, values);
+    const { result, error } = await fetchData("https://api.huven.boogiecoin.com/login", 'POST', false, values);
  
     if(error){
       alert('Opps, Invalid Credentials')
@@ -25,7 +25,6 @@ function Login({ setLoggedIn, setUserDetails }) {
     }
     (result.current_user)
     setUserDetails(result.current_user)
-    console.log(`Logged in with ${result.access_token}`);
     localStorage.setItem('access_token', result.access_token);
     setLoggedIn(true)
     directaccount('/account')

@@ -8,14 +8,13 @@ function Account() {
   const [properties, setProperties] = useState([]);
   const {fetchData } = useFetch();
   const userDetails = useContext(UserContext)
-  console.log(userDetails)
 
   
   useEffect(() => {
     const fetchUserProperties = async () => {
       const token = localStorage.getItem("access_token");
       if (token) {
-        const { result, error } = await fetchData("http://localhost:5000/user/properties", "GET", true, null);
+        const { result, error } = await fetchData("https://api.huven.boogiecoin.com/user/properties", "GET", true, null);
         if (result) {
           setProperties(result);
         } else {
@@ -30,7 +29,7 @@ function Account() {
     const token = localStorage.getItem("access_token");
   
     try {
-      const response = await fetch(`http://localhost:5000/properties/${id}`, {
+      const response = await fetch(`https://api.huven.boogiecoin.com/properties/${id}`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',

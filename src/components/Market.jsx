@@ -13,9 +13,9 @@ function Market() {
 
   useEffect(() => {
     const fetchInitialData = async () => {
-      const { result, error } = await fetchData("http://localhost:5000/properties", 'GET');
+      const { result, error } = await fetchData("https://api.huven.boogiecoin.com/properties", 'GET');
       if (error) {
-        console.log("Error Grabing Properties");
+        alert("Error Grabing Properties");
         
       } else {
         setProperty(result)

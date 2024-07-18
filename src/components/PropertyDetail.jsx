@@ -34,9 +34,9 @@ function PropertyDetail() {
 
 
    const fetchInitialData = async () => {
-     const { result, error } = await fetchData(`http://localhost:5000/properties/${id}`, 'GET');
+     const { result, error } = await fetchData(`https://api.huven.boogiecoin.com/properties/${id}`, 'GET');
      if (error) {
-       console.log("Error Grabing Properties Details");
+       alert("Error Grabing Properties Details");
        
      } else {
        setPropertyDetails(result)
@@ -52,7 +52,6 @@ function PropertyDetail() {
     if (propertyDetails['favorites']) {
         const userFavoriteExists = propertyDetails['favorites'].some(favorite => favorite.user_id === userDetails['id']);
         setListed(userFavoriteExists);
-  console.log('1');
 
     }
   }, [propertyDetails]);
@@ -61,9 +60,9 @@ function PropertyDetail() {
     e.preventDefault();
     
     const postReviews = async () => {
-      const { result, error } = await fetchData("http://localhost:5000/reviews", 'POST', true, formData);
+      const { result, error } = await fetchData("https://api.huven.boogiecoin.com/reviews", 'POST', true, formData);
       if (error) {
-        console.log("Error Posting Properties");
+        alert("Error Posting Properties");
         
       } else {
         setAllReviews(prev => [...prev, result])
@@ -89,7 +88,7 @@ function PropertyDetail() {
         "user_id": userDetails['id'],
         "status": 0
       }
-      const { result, error } = await fetchData(`http://localhost:5000/properties/${id}`, 'PATCH', true, values);
+      const { result, error } = await fetchData(`https://api.huven.boogiecoin.com/properties/${id}`, 'PATCH', true, values);
       if (error) {
         alert("Opps an error occured will try to fix that");
         return
@@ -102,9 +101,9 @@ function PropertyDetail() {
       let values = {
         "property_id": id,
       }
-      const { result, error } = await fetchData(`http://localhost:5000/favorites`, 'POST', true, values);
+      const { result, error } = await fetchData(`https://api.huven.boogiecoin.com/favorites`, 'POST', true, values);
       if (error) {
-        console.log("Opps an error occured will try to fix that");
+        alert("Opps an error occured will try to fix that");
         return
       }
       fetchInitialData()
@@ -112,9 +111,9 @@ function PropertyDetail() {
     };
      
     const deleteFav = async () => {
-      const { result, error } = await fetchData(`http://localhost:5000/user/favorites/${id}`, 'DELETE', true, null);
+      const { result, error } = await fetchData(`https://api.huven.boogiecoin.com/user/favorites/${id}`, 'DELETE', true, null);
       if (error) {
-        console.log("Opps an error occured will try to fix that");
+        alert("Opps an error occured will try to fix that");
         return
       }
       fetchInitialData()

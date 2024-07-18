@@ -25,10 +25,9 @@ function Register() {
         initialValues={{ username: "", email: "", password: "" }}
         validationSchema={RegisterSchema}
         onSubmit={(values, { setSubmitting, setErrors }) => {
-          axios.post("http://localhost:5000/register", values)
+          axios.post("https://api.huven.boogiecoin.com/register", values)
             .then(response => {
               setSubmitting(false);
-              console.log(response.data)
               navigate("/login");
             })
             .catch(error => {
