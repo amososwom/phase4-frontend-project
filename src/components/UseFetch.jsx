@@ -14,6 +14,7 @@ function useFetch() {
       headers: {
         'Content-Type': 'application/json',
         'Authorization': isauth ? `Bearer ${myauth}` : '',
+        'Api-Secret': 'gbv67890',
       },
       body: method === 'POST' || method === 'PUT' || method === 'PATCH' ? JSON.stringify(body) : null,
     };
@@ -27,6 +28,7 @@ function useFetch() {
       setData(result);
       setLoading(false);
       return { result, error: null };
+      
     } catch (error) {
       setError(error);
       setLoading(false);
