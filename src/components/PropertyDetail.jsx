@@ -7,7 +7,6 @@ import { UserContext } from '../App';
 import Myreview from './Myreview';
 
 
-
 function PropertyDetail() {
   
   const userDetails = useContext(UserContext)
