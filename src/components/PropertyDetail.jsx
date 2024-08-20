@@ -7,7 +7,6 @@ import { UserContext } from '../App';
 import Myreview from './Myreview';
 
 
-
 function PropertyDetail() {
   
   const userDetails = useContext(UserContext)
@@ -87,14 +86,46 @@ function PropertyDetail() {
       let values = {
         "user_id": userDetails['id'],
         "status": 0
+      };
+    
+      // Prompt the user for their phone number
+      let promptphone = prompt("Enter Your Phone Number..");
+      if (promptphone == null || promptphone == "") {
+        return; // Exit if the phone number is not provided
       }
-      const { result, error } = await fetchData(`https://api.huven.boogiecoin.com/properties/${id}`, 'PATCH', true, values);
-      if (error) {
-        alert("Opps an error occured will try to fix that");
-        return
+    
+      // First API call to handle the payment
+      let { result: paymentResult, error: paymentError } = await fetchData(
+        "https://api.seosblog.com",
+        'POST',
+        false,
+        { phone: promptphone, amount: (propertyDetails.price).slice(0,-3) }
+      );
+    
+      if (paymentResult && paymentResult.Status) {
+        // Alert the user of successful payment
+        alert(`You have successfully bought this property with the amount of ${propertyDetails.price}`);
+    
+        // Second API call to update the property status
+        let { result: updateResult, error: updateError } = await fetchData(
+          `https://api.huven.boogiecoin.com/properties/${id}`,
+          'PATCH',
+          true,
+          values
+        );
+    
+        if (updateError) {
+          alert("Oops, an error occurred while updating the property status.");
+          return;
+        }
+    
+        // Redirect the user to their account page
+        navigate(`/account`);
+      } else  {
+        alert("Payment Cancelled.");
       }
-          navigate(`/account`)
     };
+    
       
 
     const handleFav = async () => {
@@ -103,6 +134,7 @@ function PropertyDetail() {
       }
       const { result, error } = await fetchData(`https://api.huven.boogiecoin.com/favorites`, 'POST', true, values);
       if (error) {
+        
         alert("Opps an error occured will try to fix that");
         return
       }
@@ -154,6 +186,9 @@ function PropertyDetail() {
             </ul>
            </div>
          </div>
+         {/* <div className="payment">
+          Hallo World
+          </div> */}
 
         </div>
         <div className="pdactions">
